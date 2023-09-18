@@ -10,7 +10,7 @@ const NavBar = ({ active }) => {
           </a>
         </li>
           <li>
-            <Link href="/" className={active == "home" && "text-slate-300   "}>
+            <Link href="/" className={active == "home" && "text-slate-500   "}>
               Home
             </Link>
           </li>
