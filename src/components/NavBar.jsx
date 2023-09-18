@@ -6,7 +6,7 @@ const NavBar = ({ active }) => {
       <ul className="flex gap-12 items-end text-black-400 text-sm">
         <li>
           <a href="/">
-            <h1 className="text-3xl font-bold text-black-100">WatchList</h1>
+            <h1 className={active=="/" ? "text-3xl font-bold text-black-100": "text-2xl font-bold text-black-100"}>WatchList</h1>
           </a>
         </li>
         <li>
