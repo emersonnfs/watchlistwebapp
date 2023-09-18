@@ -3,8 +3,9 @@
 import { revalidatePath } from "next/cache"
 
 export async function GetSeries() {
+  const url = 'https://watchlist-production-b267.up.railway.app/'
     try {
-      const response = await fetch('https://watchlist-production-b267.up.railway.app/api/serie?size=100', { next: { revalidate: 3600 } });
+      const response = await fetch(url + 'api/serie?size=100', { next: { revalidate: 3600 } });
       if (!response.ok) {
         throw new Error('Não foi possível carregar os dados');
       }
