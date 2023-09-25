@@ -32,6 +32,7 @@ export async function PostSerie(serie) {
     if (!response.status === 200) {
       throw new Error("Não foi possível cadastrar a série");
     }
+    revalidatePath("/");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -52,6 +53,7 @@ export async function DeleteSerie(serie) {
     });
     
     if (response.status === 204) {
+      revalidatePath("/");
       return "Série deletada com sucesso";
     } else {
       throw new Error("Não foi possível deletar a série");
@@ -76,6 +78,7 @@ export async function PutSerie(serie) {
     if (!response.status === 201) {
       throw new Error("Não foi possível atualizar a série");
     }
+    revalidatePath("/");
     const data = await response.json();
     return data;
   } catch (error) {

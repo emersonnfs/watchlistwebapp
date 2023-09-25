@@ -32,6 +32,7 @@ export async function PostFilme(filme) {
     if (!response.status === 201) {
       throw new Error("Não foi possível cadastrar o filme");
     }
+    revalidatePath("/");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -51,6 +52,7 @@ export async function DeleteFilme(filme) {
       body: JSON.stringify(filme),
     });
     if (response.status === 204) {
+      revalidatePath("/");
       return "Filme deletado com sucesso";
     } else {
       throw new Error("Não foi possível deletar o filme");
@@ -74,6 +76,7 @@ export async function PutFilme(filme) {
     if (!response.status === 200) {
       throw new Error("Não foi possível atualizar o filme");
     }
+    revalidatePath("/");
     const data = await response.json();
     return data;
   } catch (error) {
