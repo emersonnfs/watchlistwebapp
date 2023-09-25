@@ -62,7 +62,7 @@ export default function Details({ params, getData, updateData, deleteData }) {
   return (
     <div>
       <NavBar />
-      <main className="flex flex-col items-center justify-center h-screen">
+      <main className="flex flex-col items-center justify-center my-3">
         <h1 className="text-2xl text-gray-700 mb-4">{item.nome}</h1>
         <div className="text-center">
           <img
@@ -75,7 +75,7 @@ export default function Details({ params, getData, updateData, deleteData }) {
         <p className="text-gray-700">Duração: {item.duracao}</p>
 
         {isEditing ? (
-          <div className="mt-2"> {/* Reduzi a margem superior aqui */}
+          <div className="mt-2">
             <div className="mb-2">
               <input
                 type="text"
@@ -108,7 +108,7 @@ export default function Details({ params, getData, updateData, deleteData }) {
             </button>
           </div>
         ) : (
-          <div className="mt-2"> {/* Reduzi a margem superior aqui */}
+          <div className="mt-2">
             <button
               onClick={handleEdit}
               className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
