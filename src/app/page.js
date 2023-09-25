@@ -6,12 +6,14 @@ import { GetFilmes } from "@/actions/filme";
 import { GetSeries } from "@/actions/serie";
 import ContentTypeButton from "@/components/ContentTypeButton";
 import Section from "@/components/Section";
+import AddContentModal from "@/components/AddContentModal";
 
 export default function Home() {
   const [contentType, setContentType] = useState("movies");
   const [favoriteData, setFavoriteData] = useState([]);
   const [watchLaterData, setWatchLaterData] = useState([]);
   const [communityData, setCommunityData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,21 +35,52 @@ export default function Home() {
 
     fetchData();
   }, [contentType]);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
-      <NavBar active={"/"}/>
+      <NavBar active={"/"} />
       <main className="container mx-auto px-4 py-8">
         <ContentTypeButton
           contentType={contentType}
           setContentType={setContentType}
         />
-        <Section title="Favoritos" data={favoriteData} />
-
-        <Section title="Para Assistir" data={watchLaterData} />
-
-        <Section title="Comunidade" data={communityData} />
+        <button
+          onClick={handleOpenModal}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 focus:outline-none"
+        >
+          +
+        </button>
+        <Section
+          title="Favoritos"
+          data={favoriteData}
+          contentType={contentType}
+        />
+        <Section
+          title="Para Assistir"
+          data={watchLaterData}
+          contentType={contentType}
+        />
+        <Section
+          title="Comunidade"
+          data={communityData}
+          contentType={contentType}
+        />
       </main>
+
+      {isModalOpen && (
+        <AddContentModal
+          contentType={contentType}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 }

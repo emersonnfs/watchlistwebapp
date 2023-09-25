@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Link from "next/link";
 
-const Section = ({ title, data }) => {
+const Section = ({ title, data, contentType }) => {
   const [startIndex, setStartIndex] = useState(0);
 
   const handleArrowClick = (direction) => {
@@ -19,12 +20,20 @@ const Section = ({ title, data }) => {
       <div className="flex space-x-4">
         {visibleData.map((item) => (
           <div key={item.id} className="bg-gray-100 p-2 rounded-lg w-full">
-            <img
-              src={`https://picsum.photos/200?random=${item.id}`}
-              alt={item.nome}
-              className="w-full h-48 object-cover"
-            />
-            <p>{item.nome}</p>
+            <Link
+              href={`/${contentType === "movies" ? "filme" : "serie"}/${
+                item.id
+              }`}
+            >
+              <div>
+                <img
+                  src={`https://picsum.photos/200?random=${item.id}`}
+                  alt={item.nome}
+                  className="w-full h-48 object-cover"
+                />
+                <p>{item.nome}</p>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
@@ -32,14 +41,14 @@ const Section = ({ title, data }) => {
         <button
           onClick={() => handleArrowClick("prev")}
           className="bg-gray-300 hover:bg-gray-300 px-2 py-1 rounded-md mr-2"
-          disabled={startIndex === 0} // Disable the previous button at the beginning
+          disabled={startIndex === 0}
         >
           Anterior
         </button>
         <button
           onClick={() => handleArrowClick("next")}
           className="bg-gray-300 hover:bg-gray-300 px-2 py-1 rounded-md"
-          disabled={startIndex + 5 >= data.length} // Disable the next button at the end
+          disabled={startIndex + 5 >= data.length}
         >
           Próximo
         </button>

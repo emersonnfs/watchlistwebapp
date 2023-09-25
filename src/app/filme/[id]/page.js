@@ -1,23 +1,8 @@
-import NavBar from "@/components/NavBar";
-
-export default function Favoritos(){
-    return(
-        <>
-            <NavBar active={"favoritos"}/>
-            <main className="container mx-auto px-4 py-8">
-                <h2>Favoritos</h2>
-            </main>
-        </>
-    )
-}'use client';
-import { useRouter } from 'next/router';
+'use client';
 import { useState, useEffect } from 'react';
 import { GetFilmeById, PutFilme, DeleteFilme } from '@/actions/filme';
 
-export default function FilmeDetails() {
-  const router = useRouter();
-  const { id } = router.query;
-
+export default function FilmeDetails({ id }) {
   const [filme, setFilme] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [nome, setNome] = useState('');
@@ -108,4 +93,12 @@ export default function FilmeDetails() {
       )}
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+
+  return {
+    props: { id },
+  };
 }
