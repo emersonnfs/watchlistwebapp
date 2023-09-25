@@ -6,7 +6,7 @@ export async function GetSeries() {
   const url = "https://watchlist-production-b267.up.railway.app/";
   try {
     const response = await fetch(
-      url + "api/serie?size=100" /*, { next: { revalidate: 3600 } }*/
+      url + "api/serie?size=100"
     );
     if (!response.ok) {
       throw new Error("Não foi possível carregar os dados");
@@ -50,16 +50,18 @@ export async function DeleteSerie(serie) {
       },
       body: JSON.stringify(serie),
     });
-    if (!response.status === 201) {
+    
+    if (response.status === 204) {
+      return "Série deletada com sucesso";
+    } else {
       throw new Error("Não foi possível deletar a série");
     }
-    const data = await response.json();
-    return data;
   } catch (error) {
     console.error("Erro ao deletar a série:", error);
     throw error;
   }
 }
+
 
 export async function PutSerie(serie) {
   const url = "https://watchlist-production-b267.up.railway.app/";

@@ -6,7 +6,7 @@ export async function GetFilmes() {
   const url = "https://watchlist-production-b267.up.railway.app/";
   try {
     const response = await fetch(
-      url + "api/filme?size=100" /*, { next: { revalidate: 3600 } }*/
+      url + "api/filme?size=100"
     );
     if (!response.ok) {
       throw new Error("Não foi possível carregar os dados");
@@ -50,11 +50,11 @@ export async function DeleteFilme(filme) {
       },
       body: JSON.stringify(filme),
     });
-    if (!response.status === 201) {
+    if (response.status === 204) {
+      return "Filme deletado com sucesso";
+    } else {
       throw new Error("Não foi possível deletar o filme");
     }
-    const data = await response.json();
-    return data;
   } catch (error) {
     console.error("Erro ao deletar o filme:", error);
     throw error;
