@@ -56,8 +56,13 @@ export default function Details({ params, getData, updateData, deleteData }) {
   };
 
   if (!item) {
-    return 
-      <NavBar /> <div>Carregando...</div>;
+    return(
+      <div>
+        <NavBar />
+        <div>Carregando...</div>
+      <div/>
+      
+    );
   }
 
   return (
