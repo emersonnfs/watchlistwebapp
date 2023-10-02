@@ -56,7 +56,7 @@ export default function Details({ params, getData, updateData, deleteData }) {
   };
 
   if (!item) {
-    return <div>Carregando...</div>
+    return <div>Carregando...</div>;
   }
 
   return (

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PostFilme } from "@/actions/filme";
 import { PostSerie } from "@/actions/serie";
 
-const AddContentModal = ({ contentType, isOpen, onClose}) => {
+const AddContentModal = ({ contentType, isOpen, onClose }) => {
   const [nome, setNome] = useState("");
   const [diretor, setDiretor] = useState("");
   const [duracao, setDuracao] = useState("");

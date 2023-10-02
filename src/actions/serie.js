@@ -1,12 +1,17 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
-export async function GetSeries() {
+export async function GetSeries(usuarioId) {
   const url = "https://watchlist-production-b267.up.railway.app/";
   try {
     const response = await fetch(
-      url + "api/serie?size=100"
+      `${url}api/serie?size=100&userId=${usuarioId}`,{
+        headers: {
+          "Authorization": `Bearer ${cookies().get("token")}`
+        }
+      }
     );
     if (!response.ok) {
       throw new Error("Não foi possível carregar os dados");
@@ -26,6 +31,7 @@ export async function PostSerie(serie) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookies().get("token")} `
       },
       body: JSON.stringify(serie),
     });
@@ -48,10 +54,11 @@ export async function DeleteSerie(serie) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookies().get("token")} `
       },
       body: JSON.stringify(serie),
     });
-    
+
     if (response.status === 204) {
       revalidatePath("/");
       return "Série deletada com sucesso";
@@ -64,7 +71,6 @@ export async function DeleteSerie(serie) {
   }
 }
 
-
 export async function PutSerie(serie) {
   const url = "https://watchlist-production-b267.up.railway.app/";
   try {
@@ -72,6 +78,7 @@ export async function PutSerie(serie) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookies().get("token")} `
       },
       body: JSON.stringify(serie),
     });
@@ -90,7 +97,11 @@ export async function PutSerie(serie) {
 export async function GetSerieById(id) {
   const url = "https://watchlist-production-b267.up.railway.app/";
   try {
-    const response = await fetch(url + "api/serie/" + id);
+    const response = await fetch(url + "api/serie/" + id,{
+      headers: {
+        "Authorization": `Bearer ${cookies().get("token")} `
+      }
+    });
     if (!response.ok) {
       throw new Error("Não foi possível carregar os dados");
     }

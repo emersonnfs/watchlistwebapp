@@ -6,18 +6,37 @@ const NavBar = ({ active }) => {
       <ul className="flex gap-12 items-end text-black-400 text-sm">
         <li>
           <a href="/">
-            <h1 className={active=="/" ? "text-3xl font-bold text-black-100": "text-2xl font-bold text-black-100"}>WatchList</h1>
+            <h1
+              className={
+                active == "/"
+                  ? "text-3xl font-bold text-black-100"
+                  : "text-2xl font-bold text-black-100"
+              }
+            >
+              WatchList
+            </h1>
           </a>
         </li>
         <li>
-          <Link href="/" className={active == "home"  ? "text-lg font-semibold text-black-200" : "text-black-400"}>
+          <Link
+            href="/"
+            className={
+              active == "home"
+                ? "text-lg font-semibold text-black-200"
+                : "text-black-400"
+            }
+          >
             Home
           </Link>
         </li>
         <li>
           <Link
             href="/favoritos"
-            className={active == "favoritos"  ? "text-lg font-semibold text-black-200" : "text-black-400"}
+            className={
+              active == "favoritos"
+                ? "text-lg font-semibold text-black-200"
+                : "text-black-400"
+            }
           >
             Favoritos
           </Link>
